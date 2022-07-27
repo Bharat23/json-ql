@@ -1,7 +1,7 @@
-# json-parser
+# json-ql
 
-[![PyPI version](https://badge.fury.io/py/json-parser.svg)](https://badge.fury.io/py/json-parser)
-[![Upload Python Package](https://github.com/Bharat23/json-parser/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Bharat23/wpt-parser/actions/workflows/python-publish.yml)
+[![PyPI version](https://badge.fury.io/py/json-ql.svg)](https://badge.fury.io/py/json-ql)
+[![Upload Python Package](https://github.com/Bharat23/json-ql/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Bharat23/wpt-ql/actions/workflows/python-publish.yml)
 
 - ## [Getting Started](#getting-started)
     * [Prerequiste](#prerequiste)
@@ -18,19 +18,19 @@
 
 - ### Installation
     ```
-    $ pip install json-parser
+    $ pip install json-ql
     ```
 
 - ### Examples
-    - Using the JSON Parser
+    - Using the JSON ql
     ```
     # import the class
-    from json_parser import JSONParser
+    from json_ql import JSONQL
     
     test_json = Fetch().json()
     keys = ['data.median.firstView.loadTime',]
     # returns a new dict with specified keys
-    JSONParser(test_json).pick(keys=keys).exec()
+    JSONQL(test_json).pick(keys=keys).exec()
 
     ```
 - ### Key Types:
@@ -142,7 +142,7 @@
 
 ### Available Methods
 
-- JSONParser
+- JSONql
 
 | Method | Params | type | default | Description 
 | --- | --- | --- | --- | --- |

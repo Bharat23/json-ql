@@ -9,25 +9,25 @@ def read(fname):
     return content
 
 
-description = "A plug-n-play package fetch test data from WPT and parse for specific keys"
+description = "A query language for json"
 try:
     long_description = read("README.MD")
 except IOError:
     long_description = description
 
 setuptools.setup(
-    name="json-parser",
-    package=["json-parser"],
+    name="json-ql",
+    package=["json-ql"],
     version="0.0.1",
     author="Bharat Sinha",
     author_email="bharat.sinha.2307@gmail.com",
     description=description,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Bharat23/wpt-parser",
+    url="https://github.com/Bharat23/json-ql",
     packages=setuptools.find_packages(),
     license="MIT",
-    keywords=["json", "parser", "lookup"],
+    keywords=["json", "query", "lookup", "dict", "list", "key"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

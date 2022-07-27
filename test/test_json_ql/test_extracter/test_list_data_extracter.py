@@ -1,7 +1,7 @@
 from typing import Any, List
 import pytest
 
-from json_parser.extracter.list_data_extracter import ListDataExtracter
+from json_ql.extracter.list_data_extracter import ListDataExtracter
 
 
 class TestListDataExtracter:

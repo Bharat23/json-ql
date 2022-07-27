@@ -11,7 +11,7 @@ from .extracter.object_list_data_regex_extracter import \
     ObjectListDataRegexExtracter
 
 
-class JSONParser:
+class JSONQL:
     def __init__(self, json: dict = {}):
         self.json = json
         self.picked_json = {}
@@ -28,7 +28,7 @@ class JSONParser:
                                     (default: {'.'})
 
         Returns:
-            JSONParser -- object of JSONParser to allow functional chaining
+            JSONQL -- object of JSONQL to allow functional chaining
         """
         if key is not None:
             final_obj = self._recursive_find(self.json, key.split(key_delimiter), 0)

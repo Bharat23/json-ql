@@ -1,7 +1,7 @@
 from typing import Any
 import pytest
 
-from json_parser.extracter.key_data_extracter import KeyDataExtracter
+from json_ql.extracter.key_data_extracter import KeyDataExtracter
 
 
 class TestKeyDataExtracter:
