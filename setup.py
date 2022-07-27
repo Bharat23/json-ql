@@ -35,7 +35,6 @@ setuptools.setup(
         "Intended Audience :: Developers",
     ],
     install_requires=[
-        "requests",
     ],
     python_requires=">=3.6",
 )
