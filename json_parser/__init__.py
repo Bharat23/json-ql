@@ -1,13 +1,14 @@
 # TODO: ADD support for array type fields while parsing eg: data.Median.[0].value
-import re
 import logging
+import re
 
 from .constants import RegexConstants
-from .extracter.KeyDataExtracter import KeyDataExtracter
-from .extracter.ListDataExtracter import ListDataExtracter
-from .extracter.ObjectListDataExtracter import ObjectListDataExtracter
-from .extracter.ListRangeDataExtracter import ListRangeDataExtractor
-from .extracter.ObjectListDataRegexExtracter import ObjectListDataRegexExtracter
+from .extracter.key_data_extracter import KeyDataExtracter
+from .extracter.list_data_extracter import ListDataExtracter
+from .extracter.object_list_data_extracter import ObjectListDataExtracter
+# from .extracter.ListRangeDataExtracter import ListRangeDataExtractor
+from .extracter.object_list_data_regex_extracter import \
+    ObjectListDataRegexExtracter
 
 
 class JSONParser:
@@ -70,7 +71,8 @@ class JSONParser:
             key {str} -- the key which needs to extracted
 
         Returns:
-            str, DataExtracter -- the key which needs to be extracted and Extracter object based on type of Extraction needed
+            str, DataExtracter -- the key which needs to be extracted and Extracter object
+            based on type of Extraction needed
         """
         extracter = KeyDataExtracter()
         if re.match(RegexConstants.INDEXED_ARRAY, key):

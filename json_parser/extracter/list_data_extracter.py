@@ -1,4 +1,4 @@
-from .DataExtracter import DataExtracter
+from .data_extracter import DataExtracter
 
 
 class ListDataExtracter(DataExtracter):
@@ -8,5 +8,5 @@ class ListDataExtracter(DataExtracter):
     def extract(self, list: list, index: int):
         try:
             return list[index]
-        except KeyError:
+        except (IndexError, KeyError):
             return None

@@ -1,4 +1,4 @@
-from .DataExtracter import DataExtracter
+from .data_extracter import DataExtracter
 
 
 class ListRangeDataExtracter(DataExtracter):
