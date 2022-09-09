@@ -33,6 +33,17 @@
     JSONQL(test_json).pick(keys=keys).exec()
 
     ```
+
+    - Using the JSONQL like a normal dictionary
+    ```
+    # create an instance of the JSONQLDict
+    # this creates a read only copy of original dictionary
+    test_json = JSONQLDict({"name": "John Doe", "details": {"age": 23}})
+
+    # query using the sample query language
+    test_json['details.age']
+    > 23
+    ```
 - ### Key Types:
     - #### key_name
         - Works like simple JSON extraction. Provide the name of the key and boom!.
@@ -142,7 +153,7 @@
 
 ### Available Methods
 
-- JSONql
+- JSONQL
 
 | Method | Params | type | default | Description 
 | --- | --- | --- | --- | --- |
