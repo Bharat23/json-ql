@@ -18,7 +18,7 @@ except IOError:
 setuptools.setup(
     name="json-ql",
     package=["json-ql"],
-    version="0.1.0",
+    version="0.1.1",
     author="Bharat Sinha",
     author_email="bharat.sinha.2307@gmail.com",
     description=description,
