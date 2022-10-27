@@ -1,7 +1,7 @@
 # TODO: ADD support for array type fields while parsing eg: data.Median.[0].value
 import logging
 import re
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 from .constants import RegexConstants
 from .extracter.key_data_extracter import KeyDataExtracter
@@ -17,9 +17,9 @@ class JSONQL:
     Class to query JSON
     """
 
-    def __init__(self, json: Dict):
-        if not isinstance(json, dict):
-            raise TypeError("Arg json should be of type dict")
+    def __init__(self, json: Union[Dict, List]):
+        if not isinstance(json, dict) and not isinstance(json, list):
+            raise TypeError("Arg json should be of type dict|list")
         self.json = json
         self.picked_json = {}
 
