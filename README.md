@@ -150,6 +150,29 @@
         # keylevel11.keylevel23.[{name~Awesome}]
         # return [{name: Awesome}]
         ```
+    - #### [[ ... ]]
+        - When the dict has a nested list and search needs to be done inside those wrap with `[]` to loop throught the list and find the data.
+        - Inside the bracket `[]` add other expressions to do the lookup at inner most nested array.
+        - Add `[]` pair for each nesting. 
+        - `[]` in this is separate from `[index]`, `[{key~regex}]`, `[{key=value}]`. If there is a nested list of dictionary and we want to find an object by matching key value. Expression will look like this `[[{key=value}]]`
+            - The outer most `[]` is for the outer list and inner `[]` is part of the key lookup expression syntax.
+        - Example: 
+        ```
+        """
+        {
+            keylevel11: {
+                keylevel21: [
+                    [{"key_arr": "1"}, {"key_arr": "4"}], 
+                    [{"key_arr": "2"}, {"key_arr": "5"}], 
+                    [{"key_arr": "3"}, {"key_arr": "6"}]
+                ],
+            }
+        }
+        """
+        # key to extract second level, and from that extarct the object with name matching Awesome
+        # keylevel11.keylevel21.[[{key_arr=5}]]
+        # return {"keylevel11.keylevel21.[[{key_arr=5}]]": {"key_arr": "5"}}
+        ```
 
 ### Available Methods
 

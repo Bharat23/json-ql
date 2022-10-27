@@ -15,13 +15,20 @@ class JSONQLDict(MutableMapping):
         self.dict_store = mapping if mapping is not None else {}
         self.key_delimiter = key_delimiter if key_delimiter is not None else "."
         self.json_ql_obj = JSONQL(self.dict_store)
-   
+
     def __getitem__(self, key: str) -> Any:
         """
         query the json same way as JSONQL
         with dict like syntax
+
+        :param key: query key that needs to be extracted
+
+        :returns: Extracted value or None if not found
         """
-        return self.json_ql_obj.pick(key=key, key_delimiter=self.key_delimiter).exec()
+        extracted_dict = self.json_ql_obj.pick(key=key, key_delimiter=self.key_delimiter).exec()
+        # extract the values instead of returning the dict
+        extracted_values = list(extracted_dict.values())
+        return extracted_values[0] if len(extracted_values) > 0 else None
 
     def __setitem__(self, __k: Any, __v: Any) -> None:
         """

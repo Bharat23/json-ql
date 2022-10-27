@@ -7,8 +7,9 @@ class ObjectListDataExtracter(DataExtracter):
 
     def extract(self, obj_list: list, key: str):
         try:
-            key = key.replace(" ", "")
             dict_key, dict_value = key.split("=")
+            dict_key = dict_key.strip()
+            dict_value = dict_value.strip()
             for obj in obj_list:
                 if obj.get(dict_key, None) is not None and obj.get(dict_key) == dict_value:
                     return obj

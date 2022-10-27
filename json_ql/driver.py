@@ -1,6 +1,7 @@
 # TODO: ADD support for array type fields while parsing eg: data.Median.[0].value
 import logging
 import re
+from typing import Any, Dict, List
 
 from .constants import RegexConstants
 from .extracter.key_data_extracter import KeyDataExtracter
@@ -16,10 +17,9 @@ class JSONQL:
     Class to query JSON
     """
 
-    def __init__(self, json: dict):
-        """
-        Class
-        """
+    def __init__(self, json: Dict):
+        if not isinstance(json, dict):
+            raise TypeError("Arg json should be of type dict")
         self.json = json
         self.picked_json = {}
 
@@ -46,20 +46,19 @@ class JSONQL:
                 self.picked_json[key_mapping.get(key, key)] = final_obj
         return self
 
-    def _recursive_find(self, obj: dict = {}, level_list: list = [], index: int = 0):
+    def _recursive_find(self, obj: Dict, level_list: List, index: int = 0):
         """recursively find and extract the requested keys
 
         Keyword Arguments:
-            obj {dict} -- object on which extraction needs to be done (default: {{}})
-            level_list {list} -- list of key depth (default: {[]})
+            obj {dict} -- object on which extraction needs to be done
+            level_list {list} -- list of key depth
             index {int} -- index of the level list (default: {0})
 
         Returns:
             [type] -- The request value/dict/list
         """
         try:
-            key, extracter = self._process_key(level_list[index])
-            current_level_obj = extracter.extract(obj, key)
+            current_level_obj = self._process_key(obj, level_list[index])
             if index == (len(level_list) - 1):
                 return current_level_obj
             else:
@@ -71,31 +70,35 @@ class JSONQL:
             logging.error(ex)
             return None
 
-    def _process_key(self, key: str):
+    def _process_key(self, obj: Any, key: str) -> Any:
         """processes the key to make it usable for extraction and decides extraction type
 
-        Arguments:
-            key {str} -- the key which needs to extracted
+        :param obj: obj on which key needs to be processed
+        :param key: the key which needs to extracted
 
-        Returns:
-            str, DataExtracter -- the key which needs to be extracted and Extracter object
-            based on type of Extraction needed
+        :returns: extracted value
         """
-        extracter = KeyDataExtracter()
         if re.match(RegexConstants.INDEXED_ARRAY, key):
             key = int(re.findall(RegexConstants.INDEXED_ARRAY, key)[0])
-            extracter = ListDataExtracter()
+            return ListDataExtracter().extract(obj, key)
         elif re.match(RegexConstants.DICT_ARRAY_SEARCH, key):
             key = re.findall(RegexConstants.DICT_ARRAY_SEARCH, key)[0]
-            extracter = ObjectListDataExtracter()
+            return ObjectListDataExtracter().extract(obj, key)
         elif re.match(RegexConstants.DICT_ARRAY_REGEX_SEARCH, key):
             key = re.findall(RegexConstants.DICT_ARRAY_REGEX_SEARCH, key)[0]
-            extracter = ObjectListDataRegexExtracter()
+            return ObjectListDataRegexExtracter().extract(obj, key)
+        elif re.match(RegexConstants.NESTED_LIST, key):
+            key = re.findall(RegexConstants.NESTED_LIST, key)[0]
+            for item in obj:
+                returned_value = self._process_key(item, key)
+                if returned_value is not None:
+                    return returned_value
+        else:
+            return KeyDataExtracter().extract(obj, key)
         # TODO: add support for range of array index
         # elif re.match(RegexConstants.RANGE_INDEXED_ARRAY, key):
         #     key = re.findall(RegexConstants.RANGE_INDEXED_ARRAY, key)[0]
         #     extracter = ListRangeDataExtractor()
-        return key, extracter
 
     def remove(self, key: str = None, keys: list = []):
         # TODO: Add remove key functionality
