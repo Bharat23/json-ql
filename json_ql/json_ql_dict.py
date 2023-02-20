@@ -27,8 +27,7 @@ class JSONQLDict(MutableMapping):
         """
         extracted_dict = self.json_ql_obj.pick(key=key, key_delimiter=self.key_delimiter).exec()
         # extract the values instead of returning the dict
-        extracted_values = list(extracted_dict.values())
-        return extracted_values[0] if len(extracted_values) > 0 else None
+        return extracted_dict[key] if key in extracted_dict else None
 
     def __setitem__(self, __k: Any, __v: Any) -> None:
         """
