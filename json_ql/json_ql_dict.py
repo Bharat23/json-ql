@@ -1,5 +1,6 @@
-from typing import Any, Dict
 from collections.abc import MutableMapping
+from typing import Any, Dict
+
 from .driver import JSONQL
 
 
