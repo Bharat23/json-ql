@@ -17,13 +17,13 @@
     - pip
 
 - ### Installation
-    ```
+    ```bash
     $ pip install json-ql
     ```
 
 - ### Examples
     - Using the JSON ql
-    ```
+    ```python
     # import the class
     from json_ql import JSONQL
     
@@ -35,7 +35,7 @@
     ```
 
     - Using the JSONQL like a normal dictionary
-    ```
+    ```python
     # create an instance of the JSONQLDict
     # this creates a read only copy of original dictionary
     test_json = JSONQLDict({"name": "John Doe", "details": {"age": 23}})
@@ -49,7 +49,7 @@
         - Works like simple JSON extraction. Provide the name of the key and boom!.
         - For extraction from beyond first level, append keys with a separator and provide `key_delimiter` for the program to recognize the start of next level.
         - Example: 
-        ```
+        ```python
         """
         {
             keylevel11: {
@@ -72,7 +72,7 @@
         - When you have a list as value and you want to extract a specific index value/object.
         - For extraction from beyond first level, append keys with a separator and provide `key_delimiter` for the program to recognize the start of next level.
         - Example: 
-        ```
+        ```python
         """
         {
             keylevel11: {
@@ -93,7 +93,7 @@
         - When you have a unordered list of object and you want extract a specific object from the list based on the key and value inside the object
         - For extraction from beyond first level, append keys with a separator and provide `key_delimiter` for the program to recognize the start of next level.
         - Example: 
-        ```
+        ```python
         """
         {
             keylevel11: {
@@ -125,7 +125,7 @@
         - The regex search is case sensitive. You do not need to add `//` or `r''` to write your regex.
         - The search will find all the matches and return a list
         - Example: 
-        ```
+        ```python
         """
         {
             keylevel11: {
@@ -157,7 +157,7 @@
         - `[]` in this is separate from `[index]`, `[{key~regex}]`, `[{key=value}]`. If there is a nested list of dictionary and we want to find an object by matching key value. Expression will look like this `[[{key=value}]]`
             - The outer most `[]` is for the outer list and inner `[]` is part of the key lookup expression syntax.
         - Example: 
-        ```
+        ```python
         """
         {
             keylevel11: {
